@@ -1,0 +1,134 @@
+import org.gradle.api.publish.maven.MavenPublication
+
+plugins {
+	id 'java'
+	id 'java-library'
+	id 'org.springframework.boot' version '3.2.4'
+	id 'io.spring.dependency-management' version '1.1.4'
+	id 'maven-publish'
+}
+
+group = 'run.freshr'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	sourceCompatibility = '17'
+}
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	maven {
+		url "https://:${githubPackageRead}@maven.pkg.github.com/${githubOwner}/*"
+//    url "${nexusRepository}/maven-public/"
+	}
+	mavenCentral()
+}
+
+dependencies {
+	// Test
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	// Web
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+
+	// Validation
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+	// Security
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	testImplementation 'org.springframework.security:spring-security-test'
+
+	// JWT: library-core-utils
+	implementation 'io.jsonwebtoken:jjwt-api:0.12.5'
+	runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.12.5'
+	runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.12.5'
+
+	// Configuration Processor
+	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+
+	// LOMBOK
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+
+	// JPA
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+	// QueryDsl
+	implementation "com.querydsl:querydsl-jpa:${dependencyManagement.importedProperties['querydsl.version']}:jakarta"
+	annotationProcessor "com.querydsl:querydsl-apt:${dependencyManagement.importedProperties['querydsl.version']}:jakarta"
+	testImplementation 'com.querydsl:querydsl-jpa'
+	testAnnotationProcessor 'com.querydsl:querydsl-apt'
+
+	// Redis
+	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+
+	// Elasticsearch
+	implementation 'org.springframework.boot:spring-boot-starter-data-elasticsearch'
+
+	// Jakarta: JPA & QueryDsl
+	annotationProcessor 'jakarta.annotation:jakarta.annotation-api'
+	annotationProcessor 'jakarta.persistence:jakarta.persistence-api'
+
+  // AOP
+  implementation 'org.springframework.boot:spring-boot-starter-aop'
+
+	// FreshR
+	implementation "${group}:library-core-utils:1.0.0.RELEASE"
+	implementation "${group}:library-core-enumeration-mapper:1.0.0.RELEASE"
+	implementation "${group}:library-core-exceptions:1.0.0.RELEASE"
+
+	api "${group}:configure-extensions:1.0.0.RELEASE"
+	api "${group}:configure-jpa:1.0.0.RELEASE"
+	api "${group}:configure-redis:1.0.0.RELEASE"
+
+	api "${group}:extension-web:1.0.0.RELEASE"
+	api "${group}:extension-entity:1.0.0-SNAPSHOT"
+	api "${group}:extension-auth:1.0.0-SNAPSHOT"
+}
+
+test {
+	useJUnitPlatform()
+}
+
+bootJar {
+	enabled = false
+}
+
+jar {
+	enabled = true
+	archiveClassifier = ''
+}
+
+publishing {
+	publications {
+		maven(MavenPublication) {
+			artifact("build/libs/${rootProject.name}-${version}" + ".jar") {
+				extension 'jar'
+			}
+		}
+	}
+
+	repositories {
+		maven {
+			url = "${githubPackageMaven}/${githubOwner}/${rootProject.name}"
+			credentials {
+				username System.getenv("GITHUB_ACTOR")
+				password System.getenv("GITHUB_TOKEN")
+			}
+//      url = version.endsWith('SNAPSHOT')
+//              ? "${nexusRepository}/maven-snapshots/"
+//              : "${nexusRepository}/maven-releases/"
+//      credentials {
+//        username "${nexusUsername}"
+//        password "${nexusPassword}"
+//      }
+		}
+	}
+
+	publishMavenPublicationToMavenRepository.dependsOn(jar)
+}
