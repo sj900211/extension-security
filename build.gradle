@@ -1,5 +1,3 @@
-import org.gradle.api.publish.maven.MavenPublication
-
 plugins {
 	id 'java'
 	id 'java-library'
@@ -9,7 +7,7 @@ plugins {
 }
 
 group = 'run.freshr'
-version = '0.0.1-SNAPSHOT'
+version = '1.0.0-SNAPSHOT'
 
 java {
 	sourceCompatibility = '17'
@@ -85,6 +83,7 @@ dependencies {
 	api "${group}:configure-extensions:1.0.0.RELEASE"
 	api "${group}:configure-jpa:1.0.0.RELEASE"
 	api "${group}:configure-redis:1.0.0.RELEASE"
+	api "${group}:configure-elasticsearch:1.0.0.RELEASE"
 
 	api "${group}:extension-web:1.0.0.RELEASE"
 	api "${group}:extension-entity:1.0.0-SNAPSHOT"
