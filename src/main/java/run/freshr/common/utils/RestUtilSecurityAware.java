@@ -25,8 +25,7 @@ import run.freshr.domain.auth.unit.jpa.AccountAuthUnit;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public abstract class RestUtilSecurityAware<C extends CustomConfigurationAware> extends
-    RestUtilAware<C> {
+public abstract class RestUtilSecurityAware<C extends CustomConfigurationAware> extends RestUtilAware<C> {
 
   private static AccountAuthUnit accountAuthUnit;
 
