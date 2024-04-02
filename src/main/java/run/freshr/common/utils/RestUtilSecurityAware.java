@@ -3,8 +3,6 @@ package run.freshr.common.utils;
 import static run.freshr.common.security.TokenProvider.signedId;
 import static run.freshr.common.security.TokenProvider.signedRole;
 
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 import run.freshr.common.configurations.CustomConfigurationAware;
@@ -22,10 +20,9 @@ import run.freshr.domain.auth.unit.jpa.AccountAuthUnit;
  *          {@link RestUtilAware} 를 상속 받아 계정 관련 기능 추가
  * @since 2024. 4. 2. 오전 11:09:37
  */
-@Slf4j
 @Component
-@RequiredArgsConstructor
-public abstract class RestUtilSecurityAware<C extends CustomConfigurationAware> extends RestUtilAware<C> {
+public abstract class RestUtilSecurityAware<C extends CustomConfigurationAware> extends
+    RestUtilAware<C> {
 
   private static AccountAuthUnit accountAuthUnit;
 
