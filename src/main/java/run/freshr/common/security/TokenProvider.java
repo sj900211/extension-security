@@ -100,7 +100,7 @@ public class TokenProvider {
    * @since 2024. 3. 29. 오전 10:03:07
    */
   public void validateAccessToken(final String token) {
-    validateToken(token, accessRedisUnit.exists(token));
+    validateToken(token, true);
   }
 
   /**
@@ -112,22 +112,24 @@ public class TokenProvider {
    * @since 2024. 3. 29. 오전 10:03:07
    */
   public void validateRefreshToken(final String token) {
-    validateToken(token, refreshRedisUnit.exists(token));
+    validateToken(token, false);
   }
 
   /**
    * 토큰 유효성 검증
    *
-   * @param token  token
-   * @param exists exists
+   * @param token    token
+   * @param isAccess is access
    * @apiNote 토큰 유효성 검증
    * @author FreshR
    * @since 2024. 3. 29. 오전 10:03:07
    */
-  private void validateToken(String token, Boolean exists) {
+  private void validateToken(String token, Boolean isAccess) {
     if (!hasLength(token)) {
       return;
     }
+
+    boolean exists = isAccess ? accessRedisUnit.exists(token) : refreshRedisUnit.exists(token);
 
     if (!exists) { // 발급한 토큰인지 체크
       throw new UnAuthenticatedException("error validate token");
