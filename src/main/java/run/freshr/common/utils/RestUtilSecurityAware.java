@@ -5,7 +5,6 @@ import static run.freshr.common.security.TokenProvider.signedRole;
 
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
-import run.freshr.common.configurations.CustomConfigurationAware;
 import run.freshr.common.data.ExceptionsData;
 import run.freshr.domain.account.entity.Account;
 import run.freshr.domain.auth.enumerations.Role;
@@ -14,15 +13,13 @@ import run.freshr.domain.auth.unit.jpa.AccountAuthUnit;
 /**
  * 자주 사용하는 공통 기능을 정의
  *
- * @param <C> type parameter
  * @author FreshR
  * @apiNote 자주 사용하는 공통 기능을 정의<br>
  *          {@link RestUtilAware} 를 상속 받아 계정 관련 기능 추가
  * @since 2024. 4. 2. 오전 11:09:37
  */
 @Component
-public abstract class RestUtilSecurityAware<C extends CustomConfigurationAware> extends
-    RestUtilAware<C> {
+public abstract class RestUtilSecurityAware extends RestUtilAware {
 
   private static AccountAuthUnit accountAuthUnit;
 
