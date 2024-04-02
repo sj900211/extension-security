@@ -16,10 +16,11 @@ import run.freshr.domain.auth.unit.jpa.AccountAuthUnit;
 /**
  * 자주 사용하는 공통 기능을 정의
  *
+ * @param <C> type parameter
  * @author FreshR
  * @apiNote 자주 사용하는 공통 기능을 정의<br>
  *          {@link RestUtilAware} 를 상속 받아 계정 관련 기능 추가
- * @since 2024. 3. 29. 오전 11:02:33
+ * @since 2024. 4. 2. 오전 11:09:37
  */
 @Slf4j
 @Component
