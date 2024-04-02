@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
+import run.freshr.common.configurations.CustomConfigurationAware;
 import run.freshr.common.data.ExceptionsData;
 import run.freshr.domain.account.entity.Account;
 import run.freshr.domain.auth.enumerations.Role;
@@ -23,7 +24,8 @@ import run.freshr.domain.auth.unit.jpa.AccountAuthUnit;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public abstract class RestUtilSecurityAware extends RestUtilAware {
+public abstract class RestUtilSecurityAware<C extends CustomConfigurationAware> extends
+    RestUtilAware<C> {
 
   private static AccountAuthUnit accountAuthUnit;
 
