@@ -7,7 +7,7 @@ plugins {
 }
 
 group = 'run.freshr'
-version = '1.0.0-SNAPSHOT'
+version = '1.0.0.RELEASE'
 
 java {
 	sourceCompatibility = '17'
@@ -76,18 +76,18 @@ dependencies {
   implementation 'org.springframework.boot:spring-boot-starter-aop'
 
 	// FreshR
-	implementation "${group}:library-core-utils:1.0.0-SNAPSHOT"
-	implementation "${group}:library-core-enumeration-mapper:1.0.0-SNAPSHOT"
-	implementation "${group}:library-core-exceptions:1.0.0-SNAPSHOT"
+	implementation "${group}:library-core-utils:1.0.0.RELEASE"
+	implementation "${group}:library-core-enumeration-mapper:1.0.0.RELEASE"
+	implementation "${group}:library-core-exceptions:1.0.0.RELEASE"
 
-	api "${group}:configure-extensions:1.0.0-SNAPSHOT"
-	api "${group}:configure-jpa:1.0.0-SNAPSHOT"
-	api "${group}:configure-redis:1.0.0-SNAPSHOT"
-	api "${group}:configure-elasticsearch:1.0.0-SNAPSHOT"
+	api "${group}:configure-extensions:1.0.0.RELEASE"
+	api "${group}:configure-jpa:1.0.0.RELEASE"
+	api "${group}:configure-redis:1.0.0.RELEASE"
+	api "${group}:configure-elasticsearch:1.0.0.RELEASE"
 
-	api "${group}:extension-web:1.0.0-SNAPSHOT"
-	api "${group}:extension-entity:1.0.0-SNAPSHOT"
-	api "${group}:extension-auth:1.0.0-SNAPSHOT"
+	api "${group}:extension-web:1.0.0.RELEASE"
+	api "${group}:extension-entity:1.0.0.RELEASE"
+	api "${group}:extension-auth:1.0.0.RELEASE"
 }
 
 test {

@@ -10,13 +10,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 import run.freshr.common.data.EntityData;
 import run.freshr.common.data.ExceptionData;
-import run.freshr.common.data.ExceptionsData;
 import run.freshr.common.data.ResponseData;
 import run.freshr.common.exceptions.UnAuthenticatedException;
 import run.freshr.common.utils.JwtUtil;
@@ -32,7 +30,6 @@ import run.freshr.domain.auth.unit.redis.RefreshRedisUnit;
  * @apiNote Token 관리 기능 정의
  * @since 2024. 3. 29. 오전 10:02:53
  */
-@Slf4j
 @Component
 @RequiredArgsConstructor
 public class TokenProvider {
@@ -40,7 +37,6 @@ public class TokenProvider {
   private final AccessRedisUnit accessRedisUnit;
   private final RefreshRedisUnit refreshRedisUnit;
 
-  private final ExceptionsData exceptionsData;
   private final EntityData entityData;
 
   private final ObjectMapper objectMapper;
